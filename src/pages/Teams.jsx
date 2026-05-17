@@ -22,7 +22,7 @@ const TeamCard = ({ image, name, role, linkedin, instagram, email }) => {
                    opacity-0 blur-lg transition-opacity duration-300
                    group-hover:opacity-100"
       />
-      
+
       {/* Avatar */}
       <div className="w-40 h-40 rounded-full overflow-hidden 
                       border-4 border-white shadow-md z-10">
@@ -84,22 +84,22 @@ const TeamCard = ({ image, name, role, linkedin, instagram, email }) => {
 const Teams = () => {
   return (
     <div className="relative min-h-screen bg-slate-50 overflow-hidden">
-      
+
       {/* Background Patriotic Mesh Blobs */}
       <div className="absolute top-0 left-0 w-full h-full -z-0 pointer-events-none">
         {/* Saffron Blob (Top Left) */}
         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[#FF9933]/10 blur-[120px]" />
-        
+
         {/* Green Blob (Bottom Right) */}
         <div className="absolute bottom-[5%] right-[-5%] w-[45%] h-[45%] rounded-full bg-[#138808]/10 blur-[120px]" />
-        
+
         {/* Blue Accent Blob (Middle Left) */}
         <div className="absolute top-[40%] left-[-5%] w-[30%] h-[30%] rounded-full bg-blue-700/5 blur-[100px]" />
       </div>
 
       {/* Content Container */}
       <div className="relative z-10 px-6 py-16 max-w-7xl mx-auto">
-        
+
         {/* EXECUTIVE BODY */}
         <h2 className="text-4xl font-extrabold mb-14 text-center text-[#19366b] tracking-tight">
           Executive Body
@@ -121,7 +121,7 @@ const Teams = () => {
 
         {/* SUB TEAMS */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent mb-24" />
-        
+
         <h2 className="text-4xl font-extrabold mb-14 text-center text-[#19366b] tracking-tight">
           Sub Teams
         </h2>

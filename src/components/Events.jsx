@@ -1,71 +1,74 @@
-export default function Events() {
+import { events } from "../data/events";
+
+function Events() {
   return (
-    <section id="events" className="w-full bg-gray-50 py-16">
-      <div className="w-full px-4 max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-[#19366b] mb-4">Events</h2>
-          <div className="w-24 h-1 bg-[#F6170F] mx-auto"></div>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Event Card 1 */}
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
-            <div className="h-48 bg-gradient-to-r from-[#19366b] to-[#F6170F] flex items-center justify-center">
-              <span className="text-white text-4xl">📅</span>
-            </div>
-            <div className="p-6">
-              <h3 className="text-xl font-bold text-[#19366b] mb-2">Community Outreach</h3>
-              <p className="text-gray-600 mb-4">Join us in our community service initiatives aimed at helping the underprivileged.</p>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-500">Date: Coming Soon</span>
-                <button className="bg-[#F6170F] text-white px-4 py-2 rounded hover:bg-red-700 transition-colors">
-                  Register
-                </button>
-              </div>
-            </div>
-          </div>
-          
-          {/* Event Card 2 */}
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
-            <div className="h-48 bg-gradient-to-r from-[#19366b] to-[#F6170F] flex items-center justify-center">
-              <span className="text-white text-4xl">🌱</span>
-            </div>
-            <div className="p-6">
-              <h3 className="text-xl font-bold text-[#19366b] mb-2">Environmental Drive</h3>
-              <p className="text-gray-600 mb-4">Participate in our tree plantation and cleanliness drives across the city.</p>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-500">Date: Coming Soon</span>
-                <button className="bg-[#F6170F] text-white px-4 py-2 rounded hover:bg-red-700 transition-colors">
-                  Register
-                </button>
-              </div>
-            </div>
-          </div>
-          
-          {/* Event Card 3 */}
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
-            <div className="h-48 bg-gradient-to-r from-[#19366b] to-[#F6170F] flex items-center justify-center">
-              <span className="text-white text-4xl">❤️</span>
-            </div>
-            <div className="p-6">
-              <h3 className="text-xl font-bold text-[#19366b] mb-2">Health Camp</h3>
-              <p className="text-gray-600 mb-4">Free medical check-ups and health awareness programs for rural communities.</p>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-500">Date: Coming Soon</span>
-                <button className="bg-[#F6170F] text-white px-4 py-2 rounded hover:bg-red-700 transition-colors">
-                  Register
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div className="mt-12 text-center">
-          <p className="text-gray-600 text-lg">
-            Stay tuned for updates on upcoming events and activities organized by NSS BIT Mesra.
+    <div className="w-full min-h-screen bg-[#F8FAFC] font-sans">
+
+      
+      <div className="relative w-full h-[60vh] min-h-[450px] overflow-hidden">
+        <img
+          src="/health.jpeg"
+          alt="Events"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+
+        <div className="absolute inset-0 bg-black/60" />
+
+        <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-widest uppercase">
+            EVENTS & ACTIVITIES
+          </h1>
+
+          <p className="mt-4 text-lg sm:text-xl text-white font-medium tracking-wide">
+            Engage With Our Community Initiatives
           </p>
         </div>
       </div>
-    </section>
+
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-20">
+
+        
+        <h2 className="text-2xl font-semibold text-[#19366b] mb-8 border-b-2 border-[#F6170F] inline-block pb-1">
+          Our Events
+        </h2>
+
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          {events.map((event) => (
+            <div
+              key={event.id}
+              className="bg-white border border-gray-200 border-t-4 border-t-[#F6170F] rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+            >
+
+              
+              <div className="aspect-[4/3] overflow-hidden">
+                <img
+                  src={event.image}
+                  alt={event.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              
+              <div className="p-5">
+                <h3 className="text-lg font-bold text-[#19366b]">
+                  {event.name}
+                </h3>
+
+                <p className="text-sm text-gray-600 mt-2 leading-relaxed border-l-2 border-l-[#F6170F] pl-3">
+                  Community engagement initiative by NSS.
+                </p>
+              </div>
+
+            </div>
+          ))}
+
+        </div>
+      </div>
+    </div>
   );
 }
+
+export default Events;

@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="w-full">
-      {/* Top red social bar */}
+      
       <div className="w-full bg-[#F6170F]">
         <div className="flex w-full items-center justify-between px-6 py-3">
           <p className="text-sm font-medium text-white">
@@ -9,7 +9,7 @@ export default function Footer() {
           </p>
 
           <div className="flex items-center gap-5">
-            {/* X */}
+            
             <a
               href="https://x.com/"
               target="_blank"
@@ -26,7 +26,7 @@ export default function Footer() {
               </svg>
             </a>
 
-            {/* Instagram */}
+            
             <a
               href="https://instagram.com/"
               target="_blank"
@@ -43,7 +43,7 @@ export default function Footer() {
               </svg>
             </a>
 
-            {/* Facebook */}
+            
             <a
               href="https://facebook.com/"
               target="_blank"
@@ -63,10 +63,10 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Main blue footer */}
+      
       <div className="w-full bg-[#19366b]">
         <div className="grid w-full grid-cols-1 gap-10 px-6 py-10 md:grid-cols-2">
-          {/* Quick Links */}
+          
           <div>
             <h3 className="text-lg font-semibold text-white">Quick Links</h3>
             <ul className="mt-3 space-y-1 text-sm text-white/90">
@@ -93,7 +93,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact */}
+          
           <div className="md:justify-self-end md:text-left">
             <h3 className="text-lg font-semibold text-white">Contact</h3>
             <div className="mt-3 space-y-2 text-sm text-white/90">
@@ -106,10 +106,10 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom copyright */}
+        
         <div className="px-6 pb-4">
           <div className="text-center text-sm text-white/95">
-            © 2025 NSS-BIT MESRA. All rights reserved.
+            © 2026 NSS-BIT MESRA. All rights reserved.
           </div>
         </div>
       </div>

@@ -1,36 +1,49 @@
+import { Link } from "react-router-dom";
+import { notices } from "../data/notices";
+import { events } from "../data/events";
+const latestNotices = notices.slice(0, 5);
+const scrollNotices = [...latestNotices, ...latestNotices];
+const latestEvents = [...events]
+  .sort((a, b) => b.id - a.id)
+  .slice(0, 6);
+
 export default function Message() {
   return (
     <section id="notice" className="w-full bg-[#E0F7FA] py-10">
       <div className="w-full px-4">
-        {/* Outer frame (dark border look from screenshot) */}
-        <div className="w-full overflow-hidden rounded-6px border border-slate-300 bg-white shadow-[0_10px_28px_rgba(0,0,0,0.18)]">
-          {/* Top bar */}
+        
+        <div className="w-full overflow-hidden rounded-6px border border-slate-300 bg-[#E0F7FA] shadow-[0_10px_28px_rgba(0,0,0,0.18)]">
+          
           <div className="flex items-center justify-between bg-[#19366b] px-6 py-3">
-            <div className="w-180px text-left text-sm font-semibold uppercase tracking-wide text-white leading-tight">
+            <div className="w-180px text-left text-sm font-semibold uppercase tracking-wide text-white leading-tight pr-4">
               RECENT
               <br />
               NOTICES
             </div>
 
-            <div className="flex-1 text-center text-sm font-semibold uppercase tracking-wide text-white">
-              NSS EXECUTIVE FORM K25 FORM
+            <div className="flex-1 overflow-hidden">
+              <div className="flex whitespace-nowrap animate-scroll-left text-sm font-semibold uppercase tracking-wide text-white">
+                {scrollNotices.map((item, index) => (
+                  <span key={index} className="mx-8 flex-shrink-0">
+                    {item.title}
+                  </span>
+                ))}
+              </div>
             </div>
 
-            <div className="w-180px text-right">
-              <a
-                href="#"
-                className="inline-block rounded-full bg-[#F6170F] px-4 py-2 text-xs font-bold uppercase tracking-wide text-white"
+            <div className="w-45 text-right">
+              <Link
+                to="/notice"
+                className="inline-block rounded-full bg-[#F6170F] px-4 py-2 text-xs font-bold uppercase tracking-wide text-white hover:opacity-90 transition"
               >
-                VIEW ALL
-                <br />
-                NOTICES
-              </a>
+                VIEW ALL <br /> NOTICES
+              </Link>
             </div>
           </div>
 
-          {/* Content */}
+          
           <div className="bg-[#E0F7FA] px-6 py-6">
-            {/* Big notice card */}
+            
             <div className="rounded-[14px] bg-[#E8E8E8] p-6 shadow-[0_6px_18px_rgba(0,0,0,0.12)]">
               <div className="max-w-none text-[15px] leading-relaxed text-slate-800">
                 <p className="mb-4">Dear NSS Family and Friends,</p>
@@ -54,9 +67,9 @@ export default function Message() {
               </div>
             </div>
 
-            {/* Two message cards */}
+            
             <div className="mt-6 space-y-6">
-              {/* VC message */}
+              
               <div className="flex items-start gap-5 rounded-[14px] border-2 border-black bg-white p-6 shadow-[0_8px_22px_rgba(0,0,0,0.20)]">
                 <img
                   src="/Manna.png"
@@ -83,7 +96,7 @@ export default function Message() {
                 </div>
               </div>
 
-              {/* Coordinator message */}
+              
               <div className="flex items-start gap-5 rounded-[14px] border-2 border-black bg-white p-6 shadow-[0_8px_22px_rgba(0,0,0,0.20)]">
                 <img
                   src="/Pandey.png"
@@ -107,8 +120,42 @@ export default function Message() {
                 </div>
               </div>
             </div>
+
           </div>
-          {/* end content */}
+          
+        </div>
+
+        
+        <div className="mt-8 rounded-[14px] bg-[#E0F7FA] p-6 shadow-[0_6px_18px_rgba(0,0,0,0.12)] sm:p-8">
+          <div className="mb-8 flex items-end justify-between">
+            <h2 className="text-2xl font-extrabold text-[#19366b] sm:text-3xl">
+              Recent Events
+            </h2>
+            <div className="h-[3px] w-20 bg-[#F6170F]" />
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {latestEvents.map((event) => (
+              <article
+                key={event.id}
+                className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+              >
+                <div className="aspect-[16/10] overflow-hidden">
+                  <img
+                    src={event.image}
+                    alt={event.name}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="text-base font-bold text-[#19366b] sm:text-lg">
+                    {event.name}
+                  </h3>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

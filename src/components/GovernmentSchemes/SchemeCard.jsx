@@ -37,7 +37,7 @@ function SchemeCard({ scheme }) {
     >
       <div className="h-[3px] w-full bg-[#19366B]" />
       <div className="p-6 flex flex-col h-full">
-        {/* Category header */}
+        
         <div className="flex items-center gap-3 mb-4">
           <div
             className="
@@ -67,7 +67,7 @@ function SchemeCard({ scheme }) {
           </span>
         </div>
 
-        {/* Title */}
+        
         <h3
           className="
             text-[16px]
@@ -80,7 +80,7 @@ function SchemeCard({ scheme }) {
           {scheme.title}
         </h3>
 
-        {/* Description */}
+        
         <p
           className="
             text-sm
@@ -93,7 +93,7 @@ function SchemeCard({ scheme }) {
           {scheme.shortInfo}
         </p>
 
-        {/* Footer action */}
+        
         <div className="mt-auto pt-4 border-t border-[#E6EAF0]">
           <a
             href={scheme.link}

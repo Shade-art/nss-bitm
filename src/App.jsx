@@ -7,6 +7,7 @@ import AboutUs from "./components/AboutUs";
 import ActivityPage from "./components/ActivityPage";
 import GovernmentSchemes from "./pages/GovernmentSchemes";
 import Events from "./components/Events";
+import Notices from "./pages/Notices";
 
 export default function App() {
   return (
@@ -21,7 +22,7 @@ export default function App() {
             </>
           }
         />
-        <Route path="/notice" element={<Message />} />
+        <Route path="/notice" element={<Notices />} />
         <Route path="/events" element={<Events />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/teams" element={<Teams />} />

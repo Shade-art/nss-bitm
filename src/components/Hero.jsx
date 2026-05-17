@@ -1,22 +1,22 @@
 export default function Hero() {
     return (
         <section id="home" className="w-full">
-            {/* thin top red line */}
+            
             <div className="w-full bg-[#F6170F]" />
 
             <div className="relative w-full">
-                {/* background image */}
+                
                 <img
                     src="/BACKGROUND.png"
                     alt="NSS BIT Mesra"
-                    className="h-[420px] w-full object-cover sm:h-[520px]"
+                    className="h-[300px] w-full object-cover sm:h-[450px]"
                     draggable="false"
                 />
 
-                {/* subtle dark overlay (helps readability like screenshot) */}
+                
                 <div className="absolute inset-0 bg-black/35" />
 
-                {/* center text */}
+                
                 <div className="absolute inset-0 flex items-start justify-center">
                     <div className="mt-14 text-center sm:mt-16">
                         <h1
@@ -53,7 +53,7 @@ export default function Hero() {
                         </p>
                     </div>
                 </div>
-               
+
             </div>
         </section>
     );

@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { NavLink } from "react-router-dom";
-
+import { notices } from "../data/notices";
 function NavItem({ label, to }) {
   return (
     <NavLink
@@ -32,7 +32,6 @@ export default function Navbar() {
       { label: "Home", to: "/" },
       { label: "Notice", to: "/notice" },
       { label: "Events", to: "/events" },
-      { label: "Contributions", to: "/contributions" },
       { label: "Government Schemes", to: "/schemes" },
       { label: "Teams", to: "/teams" },
       { label: "About Us", to: "/about" },
@@ -41,11 +40,11 @@ export default function Navbar() {
   );
 
   return (
-    <header className="w-screen">
+    <header className="w-full">
       <div className="w-full px-0 pt-0">
         <div className="w-full overflow-hidden bg-white ring-1 ring-slate-200 shadow-[0_10px_40px_rgba(0,0,0,0.10)]">
 
-          {/* Logos row (UNCHANGED) */}
+          
           <div className="bg-white px-6 sm:px-10 py-6">
             <div className="flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-between gap-6">
               <img src="/logos/nss_logo.png" className="h-16 sm:h-20 w-auto object-contain" />
@@ -57,7 +56,7 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Nav row (FIXED) */}
+          
           <div className="relative w-screen bg-[#19366b]">
             <div className="absolute right-0 top-0 h-full w-1 bg-[#F6170F]" />
 

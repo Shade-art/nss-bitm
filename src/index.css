@@ -1,12 +1,62 @@
 @import "tailwindcss";
 
+:root {
+  --gov-red: #f6170f;
+  --gov-blue: #19366b;
+  --gov-white: #ffffff;
+}
+
 html, body, #root {
   height: 100%;
 }
 
 body {
   margin: 0;
-  background: #ffffff;
+  background: var(--gov-white);
+  color: var(--gov-blue);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+#root,
+#root * {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+
+[class*="bg-[#E0F7FA]"],
+[class*="bg-[#E8E8E8]"],
+[class*="bg-[#F8FAFC]"],
+[class*="bg-[#f0f8ff]"],
+[class*="bg-gray"],
+[class*="bg-slate"] {
+  background-color: var(--gov-white) !important;
+}
+
+[class*="text-gray"],
+[class*="text-slate"],
+[class*="text-[#374151]"],
+[class*="text-[#1F2937]"],
+[class*="text-[#4B5563]"],
+[class*="text-[#6B7280]"] {
+  color: var(--gov-blue) !important;
+}
+
+[class*="border-gray"],
+[class*="border-slate"],
+[class*="border-[#D9DEE7]"],
+[class*="border-[#E1E6ED]"],
+[class*="border-[#E6EAF0]"] {
+  border-color: rgba(25, 54, 107, 0.25) !important;
+}
+
+[class*="hover:bg-[#F1F5F9]"]:hover {
+  background-color: rgba(25, 54, 107, 0.08) !important;
+}
+
+[class*="hover:text-[#0A66C2]"]:hover,
+[class*="hover:text-[#E1306C]"]:hover {
+  color: var(--gov-blue) !important;
 }
 
 @font-face {
@@ -15,4 +65,17 @@ body {
   font-weight: 700;
   font-style: normal;
   font-display: swap;
+}
+
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-left {
+  animation: scrollLeft 10s linear infinite;
 }
