@@ -6,7 +6,7 @@ export const events = [
   },
   {
     id: 2,
-    name: "Tree Plantation Drive",
+    name: "Village Awareness Camp",
     image: "https://th.bing.com/th/id/OIP.RBpM5oHSBiy2w_zfLzlLrwHaFj?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3",
   },
   {
@@ -30,12 +30,12 @@ export const events = [
     image: "public/VEP.png",
   },
   {
-    id: 9,
+    id: 7,
     name: "Swachh Bharat Abhiyan",
     image: "public/SWACH_BHARAT.JPG",
   },
   {
-    id: 12,
+    id: 8,
     name: "Cycle Marathon",
     image: "public/Cycle_marathon.png",
   },
