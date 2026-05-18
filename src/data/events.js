@@ -7,7 +7,7 @@ export const events = [
   {
     id: 2,
     name: "Village Awareness Camp",
-    image: "https://th.bing.com/th/id/OIP.RBpM5oHSBiy2w_zfLzlLrwHaFj?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3",
+    image: "public/VILLAGE_AWARENESS.png",
   },
   {
     id: 3,
