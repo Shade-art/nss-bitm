@@ -4,7 +4,6 @@ function Events() {
   return (
     <div className="w-full min-h-screen bg-[#F8FAFC] font-sans">
 
-      
       <div className="relative w-full h-[60vh] min-h-[450px] overflow-hidden">
         <img
           src="/health.jpeg"
@@ -25,15 +24,12 @@ function Events() {
         </div>
       </div>
 
-      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-20">
 
-        
         <h2 className="text-2xl font-semibold text-[#19366b] mb-8 border-b-2 border-[#F6170F] inline-block pb-1">
           Our Events
         </h2>
 
-        
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
           {events.map((event) => (
@@ -42,7 +38,6 @@ function Events() {
               className="bg-white border border-gray-200 border-t-4 border-t-[#F6170F] rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
             >
 
-              
               <div className="aspect-[4/3] overflow-hidden">
                 <img
                   src={event.image}
@@ -51,14 +46,13 @@ function Events() {
                 />
               </div>
 
-              
               <div className="p-5">
                 <h3 className="text-lg font-bold text-[#19366b]">
                   {event.name}
                 </h3>
 
                 <p className="text-sm text-gray-600 mt-2 leading-relaxed border-l-2 border-l-[#F6170F] pl-3">
-                  Promoting social responsibility and community engagement through NSS initiatives.
+                  {event.description}
                 </p>
               </div>
 
