@@ -15,7 +15,6 @@ const formatDate = (dateStr) => {
   return new Date(dateStr).toLocaleDateString("en-US", options);
 };
 
-// Reusable CategoryTab Component for the connected tab UI
 const CategoryTab = ({ category, isActive, onClick }) => {
   return (
     <button
@@ -94,9 +93,7 @@ export default function Events() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 relative z-20">
 
-        {/* Premium Connected Search & Filter Section */}
         <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 bg-white border border-zinc-200 rounded-2xl p-4 mb-10 shadow-sm">
-          {/* Search Bar on the Left */}
           <div className="relative flex-grow max-w-xl">
             <span className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <Search className="h-4 w-4 text-zinc-400" />
@@ -105,12 +102,11 @@ export default function Events() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search events by name, description or venue..."
+              placeholder="Search events"
               className="w-full pl-10 pr-4 py-2 bg-zinc-50 border border-zinc-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#19366b]/20 focus:border-[#19366b] transition-all h-10"
             />
           </div>
 
-          {/* Category Filter Tabs on the Right */}
           <div className="overflow-x-auto scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden w-full lg:w-auto">
             <div className="flex items-center border border-zinc-200 rounded-lg bg-white overflow-hidden divide-x divide-zinc-200 h-10 min-w-max">
               {categories.map((cat) => (
@@ -125,7 +121,6 @@ export default function Events() {
           </div>
         </div>
 
-        {/* Event Cards Grid / Empty State */}
         {filteredEvents.length === 0 ? (
           <div className="text-center py-16 bg-white border border-zinc-200 rounded-2xl shadow-sm max-w-xl mx-auto mt-6">
             <Search className="h-10 w-10 text-zinc-350 mx-auto mb-3 text-[#19366b]/40" />
