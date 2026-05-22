@@ -30,6 +30,136 @@ const CategoryTab = ({ category, isActive, onClick }) => {
   );
 };
 
+const EventCard = ({ event, openModal, formatDate }) => {
+  const [coords, setCoords] = useState({ x: 0, y: 0 });
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+  const [btnOffset, setBtnOffset] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const normalizedX = (x / rect.width) - 0.5;
+    const normalizedY = (y / rect.height) - 0.5;
+    
+    const tiltX = -normalizedY * 8; 
+    const tiltY = normalizedX * 8;
+    
+    setCoords({ x, y });
+    setTilt({ x: tiltX, y: tiltY });
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setTilt({ x: 0, y: 0 });
+  };
+
+  const handleBtnMouseMove = (e) => {
+    const btn = e.currentTarget;
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    const pullX = (x / (rect.width / 2)) * 6;
+    const pullY = (y / (rect.height / 2)) * 6;
+    setBtnOffset({ x: pullX, y: pullY });
+  };
+
+  const handleBtnMouseLeave = () => {
+    setBtnOffset({ x: 0, y: 0 });
+  };
+
+  return (
+    <div
+      onClick={() => openModal(event)}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        transform: isHovered
+          ? `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale3d(1.02, 1.02, 1.02)`
+          : "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)",
+        transition: isHovered 
+          ? "transform 0.1s ease-out, box-shadow 0.5s ease-out, border-color 0.5s ease-out" 
+          : "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.6s cubic-bezier(0.16, 1, 0.3, 1)"
+      }}
+      className="group relative bg-white border border-[#19366b]/20 hover:border-[#19366b]/35 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-[#19366b]/12 flex flex-col h-full cursor-pointer select-none animate-fade-in"
+    >
+      <div className="absolute top-0 left-0 h-[3px] bg-[#f6170f] w-0 group-hover:w-full transition-all duration-500 ease-out z-30" />
+
+      <div
+        className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"
+        style={{
+          background: `radial-gradient(350px circle at ${coords.x}px ${coords.y}px, rgba(25, 54, 107, 0.08) 0%, rgba(246, 23, 15, 0.035) 60%, transparent 100%)`
+        }}
+      />
+
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-zinc-100 z-0">
+        <img
+          src={event.image}
+          alt={event.name}
+          className="w-full h-full object-cover transition-all duration-750 ease-out group-hover:scale-108 saturate-90 group-hover:saturate-110 opacity-95 group-hover:opacity-100"
+        />
+        <div className="absolute top-3.5 left-3.5 z-20 backdrop-blur-md bg-white/75 border border-white/35 text-[#19366b] text-[9.5px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-[0_4px_30px_rgba(0,0,0,0.03)] transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-[#f6170f] group-hover:to-[#19366b] group-hover:text-white group-hover:border-transparent group-hover:scale-105 group-hover:shadow-[#f6170f]/20">
+          {event.category}
+        </div>
+      </div>
+
+      <div className="p-6 flex flex-col flex-grow relative z-20 group-hover:bg-gradient-to-b group-hover:from-white group-hover:to-zinc-50/10 transition-all duration-300">
+        <div className="flex flex-wrap items-center gap-2 text-[11px] font-semibold text-zinc-400 mb-3.5">
+          <span className="flex items-center gap-1.5 bg-zinc-50/70 border border-zinc-100 group-hover:border-[#f6170f]/15 group-hover:bg-[#f6170f]/5 text-zinc-500 group-hover:text-[#f6170f] px-2.5 py-1 rounded-lg transition-all duration-500 group-hover:scale-[1.02] group-hover:-translate-y-0.5 shadow-sm group-hover:shadow-[0_2px_8px_rgba(246,23,15,0.05)]">
+            <Calendar className="h-3.5 w-3.5 transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110" />
+            {formatDate(event.date)}
+          </span>
+          <span className="flex items-center gap-1.5 bg-zinc-50/70 border border-zinc-100 group-hover:border-[#19366b]/15 group-hover:bg-[#19366b]/5 text-zinc-500 group-hover:text-[#19366b] px-2.5 py-1 rounded-lg transition-all duration-500 group-hover:scale-[1.02] group-hover:-translate-y-0.5 shadow-sm group-hover:shadow-[0_2px_8px_rgba(25,54,107,0.05)] max-w-[120px] sm:max-w-[150px] lg:max-w-[180px] truncate">
+            <MapPin className="h-3.5 w-3.5 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:scale-110" />
+            {event.location}
+          </span>
+        </div>
+
+        <h3 className="text-lg font-bold text-[#19366b] group-hover:text-[#f6170f] transition-colors mb-3 leading-snug">
+          {event.name}
+        </h3>
+
+        <p className="text-zinc-650 text-sm leading-relaxed mb-6 border-l-2 border-[#f6170f] group-hover:border-l-[3.5px] group-hover:border-l-[#19366b] pl-3 transition-all duration-500 ease-out line-clamp-3">
+          {event.description}
+        </p>
+
+        <div className="mt-auto pt-4 border-t border-zinc-100 flex items-center justify-between">
+          <span className="text-xs font-bold text-[#19366b] flex items-center gap-1 group-hover:text-[#f6170f] transition-all">
+            <span className="relative overflow-hidden pb-0.5">
+              View Details
+              <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-[#f6170f] transition-all duration-300 group-hover:w-full"></span>
+            </span>
+          </span>
+          
+          <div
+            onMouseMove={handleBtnMouseMove}
+            onMouseLeave={handleBtnMouseLeave}
+            style={{
+              transform: `translate3d(${btnOffset.x}px, ${btnOffset.y}px, 0)`,
+              transition: btnOffset.x === 0 && btnOffset.y === 0 ? "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)" : "none"
+            }}
+            className="w-7 h-7 rounded-full bg-zinc-50 border border-[#19366b]/20 flex items-center justify-center text-[#19366b] group-hover:bg-[#f6170f] group-hover:text-white group-hover:border-transparent transition-all duration-300 shadow-sm"
+          >
+            <div className="relative overflow-hidden w-3.5 h-3.5 flex items-center justify-center">
+              <ChevronRight className="absolute h-3.5 w-3.5 transition-transform duration-300 translate-x-0 group-hover:translate-x-full" />
+              <ChevronRight className="absolute h-3.5 w-3.5 transition-transform duration-300 -translate-x-full group-hover:translate-x-0" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function Events() {
   const [activeEvent, setActiveEvent] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -69,7 +199,7 @@ export default function Events() {
   return (
     <div className="w-full min-h-screen bg-zinc-50 font-sans pb-24 text-zinc-800">
 
-      <div className="relative w-full h-[50vh] min-h-[380px] overflow-hidden flex items-center justify-center">
+      <div className="relative w-full h-[35vh] sm:h-[45vh] lg:h-[50vh] min-h-[260px] sm:min-h-[320px] lg:min-h-[380px] overflow-hidden flex items-center justify-center">
         <img
           src="/health.jpeg"
           alt="NSS Events"
@@ -77,15 +207,15 @@ export default function Events() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/50" />
 
-        <div className="relative z-10 text-center px-6 max-w-4xl">
-          <span className="bg-[#f6170f] text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest shadow-md">
+        <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl">
+          <span className="bg-[#f6170f] text-white text-[10px] sm:text-xs font-bold px-3.5 sm:px-4 py-1.5 rounded-full uppercase tracking-widest shadow-md">
             NSS BIT Mesra
           </span>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-wide uppercase mt-4 mb-4 drop-shadow-md">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-wide uppercase mt-3.5 sm:mt-4 mb-3 sm:mb-4 drop-shadow-md">
             Events & Activities
           </h1>
-          <div className="w-24 h-1 bg-[#f6170f] mx-auto rounded-full mb-4" />
-          <p className="text-base sm:text-lg md:text-xl text-zinc-200 font-medium max-w-2xl mx-auto leading-relaxed">
+          <div className="w-16 sm:w-24 h-0.5 sm:h-1 bg-[#f6170f] mx-auto rounded-full mb-3 sm:mb-4" />
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-zinc-200 font-medium max-w-2xl mx-auto leading-relaxed">
             Discover, participate, and make a difference. Engage with our student-led community initiatives and welfare campaigns.
           </p>
         </div>
@@ -93,8 +223,8 @@ export default function Events() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 relative z-20">
 
-        <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 bg-white border border-zinc-200 rounded-2xl p-4 mb-10 shadow-sm">
-          <div className="relative flex-grow max-w-xl">
+        <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 bg-white border border-zinc-200 rounded-2xl p-3.5 sm:p-4 mb-8 sm:mb-10 shadow-sm">
+          <div className="relative flex-grow max-w-full lg:max-w-xl">
             <span className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <Search className="h-4 w-4 text-zinc-400" />
             </span>
@@ -107,16 +237,21 @@ export default function Events() {
             />
           </div>
 
-          <div className="overflow-x-auto scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden w-full lg:w-auto">
-            <div className="flex items-center border border-zinc-200 rounded-lg bg-white overflow-hidden divide-x divide-zinc-200 h-10 min-w-max">
-              {categories.map((cat) => (
-                <CategoryTab
-                  key={cat}
-                  category={cat}
-                  isActive={selectedCategory === cat}
-                  onClick={() => setSelectedCategory(cat)}
-                />
-              ))}
+          <div className="relative overflow-hidden w-full lg:w-auto rounded-lg">
+            <div className="absolute left-0 top-0 bottom-0 w-4 bg-gradient-to-r from-white to-transparent pointer-events-none z-10 lg:hidden" />
+            <div className="absolute right-0 top-0 bottom-0 w-4 bg-gradient-to-l from-white to-transparent pointer-events-none z-10 lg:hidden" />
+
+            <div className="overflow-x-auto scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden w-full lg:w-auto">
+              <div className="flex items-center border border-zinc-200 rounded-lg bg-white overflow-hidden divide-x divide-zinc-200 h-10 min-w-max">
+                {categories.map((cat) => (
+                  <CategoryTab
+                    key={cat}
+                    category={cat}
+                    isActive={selectedCategory === cat}
+                    onClick={() => setSelectedCategory(cat)}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -139,135 +274,91 @@ export default function Events() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredEvents.map((event) => {
-              return (
-                <div
-                  key={event.id}
-                  onClick={() => openModal(event)}
-                  className="group bg-white border border-zinc-200 hover:border-[#19366b]/40 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-[#19366b]/8 hover:-translate-y-2 hover:scale-[1.01] transition-all duration-300 ease-out flex flex-col h-full cursor-pointer"
-                >
-                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-zinc-100">
-                    <img
-                      src={event.image}
-                      alt={event.name}
-                      className="w-full h-full object-cover transition-transform duration-750 ease-out group-hover:scale-108"
-                    />
-                    <div className="absolute top-3 left-3 bg-[#19366b] group-hover:bg-[#f6170f] text-white text-[9px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm transition-colors duration-300">
-                      {event.category}
-                    </div>
-                  </div>
-
-                  <div className="p-6 flex flex-col flex-grow group-hover:bg-zinc-50/20 transition-all duration-300">
-                    <div className="flex flex-wrap items-center gap-3 text-[11px] font-semibold text-zinc-400 mb-3">
-                      <span className="flex items-center gap-1">
-                        <Calendar className="h-3.5 w-3.5 text-[#f6170f]" />
-                        {formatDate(event.date)}
-                      </span>
-                      <span className="text-zinc-300">•</span>
-                      <span className="flex items-center gap-1 max-w-[150px] truncate">
-                        <MapPin className="h-3.5 w-3.5 text-[#f6170f]" />
-                        {event.location}
-                      </span>
-                    </div>
-
-                    <h3 className="text-lg font-bold text-[#19366b] group-hover:text-[#f6170f] transition-colors mb-3 leading-snug">
-                      {event.name}
-                    </h3>
-
-                    <p className="text-zinc-650 text-sm leading-relaxed mb-6 border-l-2 border-[#f6170f] group-hover:border-l-[3.5px] group-hover:border-l-[#19366b] pl-3 transition-all duration-300">
-                      {event.description}
-                    </p>
-
-                    <div className="mt-auto pt-4 border-t border-zinc-100 flex items-center justify-between">
-                      <span className="text-xs font-bold text-[#19366b] flex items-center gap-1 group-hover:text-[#f6170f] transition-all">
-                        <span className="relative overflow-hidden pb-0.5">
-                          View Details
-                          <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-[#f6170f] transition-all duration-300 group-hover:w-full"></span>
-                        </span>
-                        <ChevronRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1.5" />
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {filteredEvents.map((event) => (
+              <EventCard
+                key={event.id}
+                event={event}
+                openModal={openModal}
+                formatDate={formatDate}
+              />
+            ))}
           </div>
         )}
 
       </div>
 
       {activeEvent && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 transition-all animate-fade-in">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-sm flex items-center justify-center p-3.5 sm:p-6 transition-all animate-fade-in">
 
-          <div className="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-hidden shadow-2xl flex flex-col relative animate-scale-up border border-zinc-200">
+          <div className="bg-white rounded-2xl sm:rounded-3xl max-w-[95vw] sm:max-w-2xl md:max-w-3xl w-full max-h-[85vh] sm:max-h-[90vh] overflow-hidden shadow-2xl flex flex-col relative animate-scale-up border border-zinc-200">
 
             <button
               onClick={() => setActiveEvent(null)}
-              className="absolute top-4 right-4 z-20 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full backdrop-blur-sm transition-all focus:outline-none cursor-pointer"
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full backdrop-blur-sm transition-all focus:outline-none cursor-pointer"
               title="Close modal"
             >
-              <X className="h-5 w-5" />
+              <X className="h-4.5 w-4.5 sm:h-5 sm:w-5" />
             </button>
 
             <div className="overflow-y-auto flex-grow scrollbar-thin">
 
-              <div className="relative h-64 sm:h-80 w-full bg-zinc-100">
+              <div className="relative h-44 sm:h-64 md:h-80 w-full bg-zinc-100">
                 <img
                   src={activeEvent.image}
                   alt={activeEvent.name}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent" />
 
-                <div className="absolute bottom-6 left-6 right-6">
-                  <span className="bg-[#f6170f] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
+                <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6">
+                  <span className="bg-[#f6170f] text-white text-[9px] sm:text-[10px] font-bold px-2.5 sm:px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
                     {activeEvent.category}
                   </span>
-                  <h2 className="text-2xl sm:text-3xl font-extrabold text-white mt-3 drop-shadow-md">
+                  <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white mt-2 sm:mt-3 drop-shadow-md leading-tight">
                     {activeEvent.name}
                   </h2>
                 </div>
               </div>
 
-              <div className="p-6 sm:p-8">
+              <div className="p-4 sm:p-6 md:p-8">
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-zinc-50 border border-zinc-150 p-5 rounded-2xl mb-6 text-sm text-zinc-700">
-                  <div className="flex items-start gap-3">
-                    <Calendar className="h-5 w-5 text-[#f6170f] shrink-0 mt-0.5" />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 bg-zinc-50 border border-zinc-150 p-4 sm:p-5 rounded-xl sm:rounded-2xl mb-5 sm:mb-6 text-xs sm:text-sm text-zinc-700">
+                  <div className="flex items-start gap-2.5 sm:gap-3">
+                    <Calendar className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-[#f6170f] shrink-0 mt-0.5" />
                     <div>
-                      <span className="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider">Date</span>
+                      <span className="block text-[9px] sm:text-[10px] font-bold text-zinc-400 uppercase tracking-wider">Date</span>
                       <span className="font-semibold text-[#19366b]">{formatDate(activeEvent.date)}</span>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <Clock className="h-5 w-5 text-[#f6170f] shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-2.5 sm:gap-3">
+                    <Clock className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-[#f6170f] shrink-0 mt-0.5" />
                     <div>
-                      <span className="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider">Time</span>
+                      <span className="block text-[9px] sm:text-[10px] font-bold text-zinc-400 uppercase tracking-wider">Time</span>
                       <span className="font-semibold text-zinc-800">{activeEvent.time}</span>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <MapPin className="h-5 w-5 text-[#f6170f] shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-2.5 sm:gap-3">
+                    <MapPin className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-[#f6170f] shrink-0 mt-0.5" />
                     <div>
-                      <span className="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider">Location</span>
+                      <span className="block text-[9px] sm:text-[10px] font-bold text-zinc-400 uppercase tracking-wider">Location</span>
                       <span className="font-semibold text-zinc-800">{activeEvent.location}</span>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <User className="h-5 w-5 text-[#f6170f] shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-2.5 sm:gap-3">
+                    <User className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-[#f6170f] shrink-0 mt-0.5" />
                     <div>
-                      <span className="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider">Coordinator</span>
+                      <span className="block text-[9px] sm:text-[10px] font-bold text-zinc-400 uppercase tracking-wider">Coordinator</span>
                       <span className="font-semibold text-zinc-800">{activeEvent.coordinator}</span>
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <h4 className="text-sm font-bold text-[#19366b] uppercase tracking-wider mb-3">
+                  <h4 className="text-xs sm:text-sm font-bold text-[#19366b] uppercase tracking-wider mb-2.5 sm:mb-3">
                     Event Overview
                   </h4>
-                  <p className="text-zinc-650 text-sm leading-relaxed whitespace-pre-line">
+                  <p className="text-zinc-650 text-xs sm:text-sm leading-relaxed whitespace-pre-line">
                     {activeEvent.detailedDescription || activeEvent.description}
                   </p>
                 </div>
