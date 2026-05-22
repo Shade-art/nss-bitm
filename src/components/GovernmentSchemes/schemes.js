@@ -15,7 +15,7 @@ const schemes = [
     title: "Ayushman Bharat (PM-JAY)",
     category: "Healthcare",
     categoryIcon: "HeartPulse",
-    link: "https://pmjay.gov.in/",
+    link: "https://www.digitalindia.gov.in/initiative/ayushman-bharat-digital-mission/",
     shortInfo:
       "World’s largest health insurance scheme offering coverage up to ₹5 lakhs per family for secondary and tertiary care."
   },
@@ -75,7 +75,7 @@ const schemes = [
     title: "Stand Up India",
     category: "Entrepreneurship",
     categoryIcon: "Rocket",
-    link: "https://www.standupmitra.in/",
+    link: "https://www.myscheme.gov.in/schemes/sui",
     shortInfo:
       "Bank loans for SC/ST and women entrepreneurs to promote inclusive growth."
   },
@@ -85,7 +85,7 @@ const schemes = [
     title: "Beti Bachao Beti Padhao",
     category: "Education",
     categoryIcon: "GraduationCap",
-    link: "https://www.myscheme.gov.in/",
+    link: "https://www.pmindia.gov.in/hi/government_tr_rec/%E0%A4%AC%E0%A5%87%E0%A4%9F%E0%A5%80-%E0%A4%AC%E0%A4%9A%E0%A4%BE%E0%A4%93-%E0%A4%AC%E0%A5%87%E0%A4%9F%E0%A5%80-%E0%A4%AA%E0%A4%A2%E0%A4%BC%E0%A4%BE%E0%A4%93-%E0%A4%AC%E0%A4%BE%E0%A4%B2/",
     shortInfo:
       "Promotes education and welfare of the girl child across India."
   },
@@ -105,7 +105,7 @@ const schemes = [
     title: "Guruji Credit Card Yojana",
     category: "Finance",
     categoryIcon: "IndianRupee",
-    link: "https://jsac.jharkhand.gov.in/",
+    link: "https://gscc.jharkhand.gov.in/",
     shortInfo:
       "Education loan support for students pursuing higher studies in Jharkhand."
   },
@@ -115,7 +115,7 @@ const schemes = [
     title: "Mukhya Mantri Sarathi Yojana",
     category: "Skill Development",
     categoryIcon: "Laptop",
-    link: "https://sarathi.jharkhand.gov.in/",
+    link: "https://jsdm.jharkhand.gov.in/jsdm/cms/en/msy/",
     shortInfo:
       "Skill training and employment support for Jharkhand youth."
   },
@@ -125,7 +125,7 @@ const schemes = [
     title: "Birsa Awas Yojana",
     category: "Finance",
     categoryIcon: "IndianRupee",
-    link: "https://rdd.jharkhand.gov.in/",
+    link: "https://www.myscheme.gov.in/hi/schemes/bany",
     shortInfo:
       "Financial assistance for housing support to rural poor families in Jharkhand."
   },
@@ -135,7 +135,7 @@ const schemes = [
     title: "Savitribai Phule Kishori Samriddhi Yojana",
     category: "Education",
     categoryIcon: "GraduationCap",
-    link: "https://wcd.jharkhand.gov.in/",
+    link: "https://savitribaipksy.jharkhand.gov.in/",
     shortInfo:
       "Financial assistance to adolescent girls for education and nutrition."
   },
@@ -145,7 +145,7 @@ const schemes = [
     title: "Chief Minister Health Insurance Scheme",
     category: "Healthcare",
     categoryIcon: "HeartPulse",
-    link: "https://abdm.jharkhand.gov.in/",
+    link: "https://www.cmchistn.com/",
     shortInfo:
       "Cashless treatment facilities for eligible families in Jharkhand."
   },
@@ -155,7 +155,7 @@ const schemes = [
     title: "Maiya Samman Yojana",
     category: "Finance",
     categoryIcon: "IndianRupee",
-    link: "https://socialwelfare.jharkhand.gov.in/",
+    link: "https://www.jharkhand.gov.in/Home/ViewDoc?id=D031DO003SD00628072024033709248",
     shortInfo:
       "Monthly financial assistance to eligible women to support basic needs."
   },
@@ -165,7 +165,7 @@ const schemes = [
     title: "Birsa Harit Gram Yojana",
     category: "Skill Development",
     categoryIcon: "Laptop",
-    link: "https://rdd.jharkhand.gov.in/",
+    link: "https://www.myscheme.gov.in/schemes/bhgy",
     shortInfo:
       "Promotes rural livelihood generation through plantation-based skill development."
   },
@@ -175,7 +175,7 @@ const schemes = [
     title: "Mukhyamantri Rojgar Srijan Yojana",
     category: "Entrepreneurship",
     categoryIcon: "Rocket",
-    link: "https://industries.jharkhand.gov.in/",
+    link: "https://cmegp.jharkhand.gov.in/",
     shortInfo:
       "Financial assistance and incentives for self-employment and MSMEs."
   },
@@ -185,7 +185,7 @@ const schemes = [
     title: "Mukhyamantri Krishi Ashirwad Yojana",
     category: "Finance",
     categoryIcon: "IndianRupee",
-    link: "https://agriculture.jharkhand.gov.in/",
+    link: "https://schemes.vikaspedia.in/viewcontent/schemesall/state-specific-schemes/welfare-schemes-of-jharkhand/mukhyamantri-krishi-ashirwad-yojna?lgn=en",
     shortInfo:
       "Financial aid to farmers for purchasing agricultural inputs."
   },
@@ -195,7 +195,7 @@ const schemes = [
     title: "Mukhyamantri Shramik Durghatna Bima Yojana",
     category: "Healthcare",
     categoryIcon: "HeartPulse",
-    link: "https://labour.jharkhand.gov.in/",
+    link: "https://www.myscheme.gov.in/schemes/jnkmdsy",
     shortInfo:
       "Accident insurance coverage for registered workers and labourers."
   }
