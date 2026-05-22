@@ -150,20 +150,20 @@ export default function Events() {
                 <div
                   key={event.id}
                   onClick={() => openModal(event)}
-                  className="group bg-white border border-zinc-200 hover:border-zinc-400 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 flex flex-col h-full cursor-pointer"
+                  className="group bg-white border border-zinc-200 hover:border-[#19366b]/40 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-[#19366b]/8 hover:-translate-y-2 hover:scale-[1.01] transition-all duration-300 ease-out flex flex-col h-full cursor-pointer"
                 >
                   <div className="relative aspect-[4/3] w-full overflow-hidden bg-zinc-100">
                     <img
                       src={event.image}
                       alt={event.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover transition-transform duration-750 ease-out group-hover:scale-108"
                     />
-                    <div className="absolute top-3 left-3 bg-[#19366b] text-white text-[9px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                    <div className="absolute top-3 left-3 bg-[#19366b] group-hover:bg-[#f6170f] text-white text-[9px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm transition-colors duration-300">
                       {event.category}
                     </div>
                   </div>
 
-                  <div className="p-6 flex flex-col flex-grow">
+                  <div className="p-6 flex flex-col flex-grow group-hover:bg-zinc-50/20 transition-all duration-300">
                     <div className="flex flex-wrap items-center gap-3 text-[11px] font-semibold text-zinc-400 mb-3">
                       <span className="flex items-center gap-1">
                         <Calendar className="h-3.5 w-3.5 text-[#f6170f]" />
@@ -180,14 +180,17 @@ export default function Events() {
                       {event.name}
                     </h3>
 
-                    <p className="text-zinc-650 text-sm leading-relaxed mb-6 border-l-2 border-[#f6170f] pl-3">
+                    <p className="text-zinc-650 text-sm leading-relaxed mb-6 border-l-2 border-[#f6170f] group-hover:border-l-[3.5px] group-hover:border-l-[#19366b] pl-3 transition-all duration-300">
                       {event.description}
                     </p>
 
                     <div className="mt-auto pt-4 border-t border-zinc-100 flex items-center justify-between">
                       <span className="text-xs font-bold text-[#19366b] flex items-center gap-1 group-hover:text-[#f6170f] transition-all">
-                        View Details
-                        <ChevronRight className="h-3 w-3" />
+                        <span className="relative overflow-hidden pb-0.5">
+                          View Details
+                          <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-[#f6170f] transition-all duration-300 group-hover:w-full"></span>
+                        </span>
+                        <ChevronRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1.5" />
                       </span>
                     </div>
                   </div>
